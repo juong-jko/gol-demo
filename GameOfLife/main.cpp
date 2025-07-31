@@ -12,7 +12,7 @@ using namespace std;
 
 struct CustomHashFunc;
 
-using Coord = int64_t;
+using Coord = __int64;
 using Cell = pair<Coord, Coord>;
 using Collection = unordered_set<Cell, CustomHashFunc>;
 
