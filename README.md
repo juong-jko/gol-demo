@@ -11,12 +11,12 @@ This project is a C++ implementation of Conway's Game of Life, a cellular automa
 
 ## How to Build and Run
 
-This is a standard C++ project. You can build it using any modern C++ compiler (like g++, Clang, or MSVC).
+This is a standard C++ project that requires a compiler with C++20 support (for features like `contains()` on `unordered_set`).
 
 ### Building with a Compiler (e.g., g++)
 
 ```bash
-g++ -std=c++17 -o GameOfLife GameOfLife/main.cpp
+g++ -std=c++20 -o GameOfLife GameOfLife/main.cpp
 ```
 
 ### Running the Simulation
@@ -26,7 +26,7 @@ The program reads the initial state of the cells from standard input. You can pi
 **Example using a file:**
 
 ```bash
-./GameOfLife < path/to/your/pattern.lif
+./GameOfLife < patterns/glider.lif
 ```
 
 **Example with manual input:**
@@ -58,6 +58,17 @@ The program expects the input to follow the **Life 1.06** format.
 1 2
 2 2
 ```
+
+## Premade Patterns
+
+This project includes a `patterns` directory containing several classic Game of Life patterns in the `.lif` format:
+
+*   `blinker.lif`: A simple two-phase oscillator.
+*   `glider.lif`: A simple spaceship that travels across the grid.
+*   `gosper_glider_gun.lif`: A pattern that continuously generates new gliders.
+*   `pulsar.lif`: A stable and beautiful three-phase oscillator.
+
+You can use these patterns directly as input for the simulation.
 
 ## Output Format
 
