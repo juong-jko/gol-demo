@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <fstream>
 #include <functional>
 #include <iostream>
@@ -26,9 +27,12 @@ struct CustomHashFunc {
 };
 
 void PrintAllAliveCells(const Collection& aliveCells) {
-    for (const auto& cell : aliveCells)
+    vector<Cell> sortedVec(aliveCells.begin(), aliveCells.end());
+    sort(sortedVec.begin(), sortedVec.end(), greater<Cell>());
+    
+    for (const auto& cell : sortedVec)
     {
-        cout << "(" << cell.first <<  ", " << cell.second << ")" << endl;
+        cout << cell.first <<  " " << cell.second << endl;
     }
 }
 
@@ -39,7 +43,11 @@ void WriteToFile(const Collection& aliveCells) {
         cerr << "Error: unable to open file." << endl;
 
     outputFile << "#Life 1.06" << endl;
-    for (const auto& cell : aliveCells) {
+
+    vector<Cell> sortedVec(aliveCells.begin(), aliveCells.end());
+    sort(sortedVec.begin(), sortedVec.end(), greater<Cell>());
+
+    for (const auto& cell : sortedVec) {
         outputFile << cell.first << " " << cell.second << endl;
     }
 
