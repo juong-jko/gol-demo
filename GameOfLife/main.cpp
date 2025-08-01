@@ -26,13 +26,15 @@ struct CustomHashFunc {
     }
 };
 
-void PrintAllAliveCells(const Collection& aliveCells) {
+template <typename Stream>
+void WriteToStream(const Collection& aliveCells, Stream& stream) {
+    stream << "#Life 1.06" << endl;
+
     vector<Cell> sortedVec(aliveCells.begin(), aliveCells.end());
     sort(sortedVec.begin(), sortedVec.end(), greater<Cell>());
-    
-    for (const auto& cell : sortedVec)
-    {
-        cout << cell.first <<  " " << cell.second << endl;
+
+    for (const auto& cell : sortedVec) {
+        stream << cell.first << " " << cell.second << endl;
     }
 }
 
@@ -42,14 +44,7 @@ void WriteToFile(const Collection& aliveCells) {
     if (!outputFile.is_open())
         cerr << "Error: unable to open file." << endl;
 
-    outputFile << "#Life 1.06" << endl;
-
-    vector<Cell> sortedVec(aliveCells.begin(), aliveCells.end());
-    sort(sortedVec.begin(), sortedVec.end(), greater<Cell>());
-
-    for (const auto& cell : sortedVec) {
-        outputFile << cell.first << " " << cell.second << endl;
-    }
+    WriteToStream(aliveCells, outputFile);
 
     outputFile.close();
 }
@@ -97,7 +92,7 @@ void Simulate(Collection& aliveCells) {
 
 int main() {
     string line;
-    Collection liveCells;
+    Collection aliveCells;
 
     // Get first line to determine format
      getline(cin, line);
@@ -117,15 +112,14 @@ int main() {
         stringstream ss(line);
         Coord x, y;
         if (ss >> x >> y) {
-            auto ret = liveCells.emplace(x, y);
+            auto ret = aliveCells.emplace(x, y);
             auto newCell = ret.first;
         }
     }
 
     for (int i = 0; i < NIterations; ++i) {
-        Simulate(liveCells);
+        Simulate(aliveCells);
     }
     
-    PrintAllAliveCells(liveCells);
-    WriteToFile(liveCells);
+    WriteToStream(aliveCells, cout);
 }
