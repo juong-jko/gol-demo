@@ -72,13 +72,13 @@ void Simulate(Collection& aliveCells) {
             for (Coord dy = -1; dy <= 1; ++dy) {
                 if (dx == 0 && dy == 0) continue;
 
-                if (aliveCells.contains(Cell(x + dx, y + dy))) {
+                if (aliveCells.count(Cell(x + dx, y + dy)) > 0) {
                     aliveCount++;
                 }
             }
         }
 
-        bool isAlive = aliveCells.contains(cell) > 0;
+        bool isAlive = aliveCells.count(cell) > 0;
         if (isAlive && (aliveCount == 2 || aliveCount == 3)) {
             nextGen.insert(cell);
         }

@@ -6,17 +6,16 @@ This project is a C++ implementation of Conway's Game of Life, a cellular automa
 
 *   **Efficient Simulation:** Uses an `unordered_set` to store only live cells, making it highly efficient for sparse patterns on a virtually infinite grid.
 *   **Life 1.06 Format:** Reads initial patterns from standard input using the common [Life 1.06 file format](https://www.conwaylife.com/wiki/Life_1.06).
-*   **File Output:** Saves the final state of the simulation to a file (`out.txt`) in the same Life 1.06 format.
 *   **Console Output:** Prints the coordinates of all live cells to the console after the simulation is complete.
 
 ## How to Build and Run
 
-This is a standard C++ project that requires a compiler with C++20 support (for features like `contains()` on `unordered_set`).
+This is a standard C++ project that requires a compiler with C++11 support.
 
 ### Building with a Compiler (e.g., g++)
 
 ```bash
-g++ -std=c++20 -o GameOfLife GameOfLife/main.cpp
+g++ -std=c++11 -o GameOfLife GameOfLife/gol.cpp
 ```
 
 ### Running the Simulation
@@ -77,20 +76,6 @@ You can use these patterns directly as input for the simulation.
 After the simulation finishes, the coordinates of all live cells in the final generation will be printed to the standard output, one cell per line.
 
 **Example Console Output:**
-
-```
-(11, 10)
-(12, 11)
-(10, 12)
-(11, 12)
-(12, 12)
-```
-
-### File Output
-
-The final generation is also saved to `out.txt` in the Life 1.06 format, which can be used as input for future simulations.
-
-**Example `out.txt`:**
 
 ```
 #Life 1.06
