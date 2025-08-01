@@ -38,7 +38,7 @@ void PrintAllAliveCells(const Collection& aliveCells) {
 
 // Output current generation to Life 1.06 format
 void WriteToFile(const Collection& aliveCells) {
-    ofstream outputFile("out.txt");
+    ofstream outputFile("output.lif");
     if (!outputFile.is_open())
         cerr << "Error: unable to open file." << endl;
 
